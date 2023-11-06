@@ -17,7 +17,7 @@ class FormRegister extends Component {
     //usamos auth dentro del metodo registrarUsuario que recibe como parametro el name,email y password para registrar al usuario en nuestra firebase
     registrarUsuario(name,mail,password){
         auth.createUserWithEmailAndPassword(mail,password)
-        .then(user => console.log(user))
+        .then(user => this.props.navigation.navigate('TabNavigation'))
         .catch(err => console.log(err))
         //como todos los metodos de firebase son promesas le agregamos then y catch
     }

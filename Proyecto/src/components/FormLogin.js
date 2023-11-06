@@ -13,10 +13,13 @@ constructor(props){
 }
 
 loguearUsuario(mail,password){
+    //hacer toda la validacion, si da okey hacer el navigate a home.
     auth.signInWithEmailAndPassword(mail,password)
     .then((user)=> console.log("Se logueo correctamente al usuario:" + user))
     .catch((err)=> console.log(err))
 }
+
+
 
   render() {
     return (
@@ -47,7 +50,8 @@ loguearUsuario(mail,password){
             />
 
             <TouchableOpacity 
-            onPress={()=> this.loguearUsuario(this.state.mail,this.state.password)}
+            onPress={()=> this.loguearUsuario(this.state.mail,this.state.password)} //metodo de validacion, si no puede loguear le diga sino this.props.navigate. 
+            onPress = { ()=> this.props.navigation.navigate('Home') }
             style = {styles.boton}>
                 <Text style = {styles.textBoton}> Iniciar sesión</Text>
             </TouchableOpacity>
