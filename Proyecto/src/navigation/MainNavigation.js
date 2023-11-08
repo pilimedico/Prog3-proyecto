@@ -6,6 +6,7 @@ import TabNavigation from './TabNavigation';
 
 import Register from '../screens/Register';
 import Login from '../screens/Login';
+import Comentarios from '../screens/Comentarios';
 
 
 const Stack = createNativeStackNavigator();
@@ -34,6 +35,13 @@ export default function MainNavigation() {
         options={{
             headerShown:false
         }}
+        />
+        <Stack.Screen
+          name='Comentarios'
+          component={Comentarios}
+          options={{
+          headerShown: false
+           }}
         />
       </Stack.Navigator>
     </NavigationContainer>

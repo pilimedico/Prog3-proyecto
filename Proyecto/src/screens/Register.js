@@ -8,13 +8,13 @@ export default class Register extends Component {
     super(props)
   }
 
-  componentDidMount(){
+   componentDidMount(){
     auth.onAuthStateChanged(( user )=> {
       if(user !== null){
         this.props.navigation.navigate('TabNavigation') //si ya tiene cuenta que vaya directo al TabNavigation
       }
     })
-  }
+  } 
 
   render() {
     return (

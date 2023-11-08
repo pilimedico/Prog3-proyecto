@@ -14,8 +14,11 @@ constructor(props){
 
 loguearUsuario(mail,password){
     //hacer toda la validacion, si da okey hacer el navigate a home.
+
     auth.signInWithEmailAndPassword(mail,password)
-    .then((user)=> console.log("Se logueo correctamente al usuario:" + user))
+    .then((user)=> {
+        this.props.navigation.navigate('TabNavigation')
+    })
     .catch((err)=> console.log(err))
 }
 
@@ -49,11 +52,20 @@ loguearUsuario(mail,password){
                 onChangeText = {(text) => this.setState({password:text})} 
             />
 
+            <Text style={styles.textLink} >
+                    ¿No tienes una cuenta?
+
+                    <TouchableOpacity
+                        onPress={()=> this.props.navigation.navigate('Register')}
+                    >
+                        Regístrate aquí!
+                    </TouchableOpacity>
+                </Text>
+
             <TouchableOpacity 
             onPress={()=> this.loguearUsuario(this.state.mail,this.state.password)} //metodo de validacion, si no puede loguear le diga sino this.props.navigate. 
-            onPress = { ()=> this.props.navigation.navigate('Home') }
-            style = {styles.boton}>
-                <Text style = {styles.textBoton}> Iniciar sesión</Text>
+            style = {styles.btn}>
+                <Text style = {styles.textBtn}> Iniciar sesión</Text>
             </TouchableOpacity>
 
 
@@ -72,16 +84,19 @@ loguearUsuario(mail,password){
 }
 
 const styles = StyleSheet.create({
-    input: {
+    input:{
         borderWidth: 1,
-        borderColor: "red",
+        borderColor: 'green',
         marginBottom: 24
     },
-    boton: {
-        backgroundColor: "black",
-        padding: 16
+    btn:{
+        backgroundColor:'purple',
+        padding:16
     },
-    textBoton: {
-        color: "white"
+    textBtn:{
+        color:'white'
+    },
+    textLink:{
+        marginBottom:24
     }
 })

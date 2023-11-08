@@ -10,22 +10,19 @@ export default class Login extends Component {
 
   
 
-  componentDidMount(){
+ /*  componentDidMount(){
     auth.onAuthStateChanged(( user )=> {
       if(user !== null){
         this.props.navigation.navigate('TabNavigation') //si ya esta logueado que vaya al TabNavigation (home)
       }
     })
-  }
+  } */
 
   render() {
     return (
       <View  >
-        <FormLogin/>
-        <Text>
-          ¿No tienes cuenta? 
-          <TouchableOpacity onPress = {()=> this.props.navigation.navigate('Register')}>Registrate aquí</TouchableOpacity>
-        </Text>
+        <FormLogin navigation = {this.props.navigation} />
+        
       </View>
     )
   }

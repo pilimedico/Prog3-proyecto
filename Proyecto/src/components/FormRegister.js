@@ -1,6 +1,6 @@
 import { Text, View, TextInput, TouchableOpacity, StyleSheet } from 'react-native'
 import React, { Component } from 'react'
-import { auth } from '../firebase/config'
+import { db, auth } from '../firebase/config'
 
 class FormRegister extends Component {
 
@@ -8,19 +8,28 @@ class FormRegister extends Component {
         super(props)
         this.state = {
             name: "",
-            mail: "",
-            password: ""
+            email: "",
+            password: "",
+            minibio: ""
 
         }
     }
+//usamos auth dentro del metodo registrarUsuario que recibe como parametro el name,email y password para autenticar al usuario en nuestra firebase
+    registrarUsuario(name, email, password, minibio){
+        auth.createUserWithEmailAndPassword(email, password)
+        .then(user => db.collection('users').add({  //como todos los metodos de firebase son promesas le agregamos then y catch
+                owner: email,  
+                createdAt: Date.now(),
+                name: name,
+                minibio: minibio
+            })
+        )
+        .then((resp) => console.log(resp)) // .collection tambien retorna una promesa entonces se escribe nuevamente then
+        .catch( err => console.log(err))
+    } 
 
-    //usamos auth dentro del metodo registrarUsuario que recibe como parametro el name,email y password para registrar al usuario en nuestra firebase
-    registrarUsuario(name,mail,password){
-        auth.createUserWithEmailAndPassword(mail,password)
-        .then(user => this.props.navigation.navigate('TabNavigation'))
-        .catch(err => console.log(err))
-        //como todos los metodos de firebase son promesas le agregamos then y catch
-    }
+    
+    
   render() {
     return (
       <View>
@@ -50,9 +59,17 @@ class FormRegister extends Component {
                 style = {styles.input}
                 placeholder = "Dinos tu mail"
                 keyboardType='email-address' //para que el usuario ingrese con el mail
-                value= {this.state.mail}  
-                onChangeText = {(text) => this.setState({mail:text})} 
+                value= {this.state.email}  
+                onChangeText = {(text) => this.setState({email:text})} 
             />
+
+            <TextInput
+            //pidiendo miibio
+                    style = {styles.input}
+                    placeholder='Crea una minibio'
+                    value={this.state.minibio}
+                    onChangeText={(text) => this.setState({minibio:text})}
+                />
 
             <TextInput
             //pidiendo la contraseña
@@ -65,11 +82,23 @@ class FormRegister extends Component {
                 onChangeText = {(text) => this.setState({password:text})} 
             />
 
-            <TouchableOpacity 
-            onPress={()=> this.registrarUsuario(this.state.name, this.state.mail,this.state.password)}
-            style = {styles.boton}>
-                <Text style = {styles.textBoton}> Registrarse</Text>
-            </TouchableOpacity>
+            <Text
+                    style={styles.textLink}
+                >
+                    ¿Tienes una cuenta? 
+                    <TouchableOpacity
+                        onPress={()=> this.props.navigation.navigate('Login')}
+                    >
+                        Logueate aquí!
+                    </TouchableOpacity>
+                </Text>
+
+
+                <TouchableOpacity 
+                onPress={()=> this.registrarUsuario(this.state.name, this.state.email, this.state.password, this.state.minibio)}                
+                style={styles.btn}>
+                    <Text style={styles.textBtn}> Registrame ahora!!</Text>
+                </TouchableOpacity>
 
 
 
@@ -87,17 +116,20 @@ class FormRegister extends Component {
 }
 
 const styles = StyleSheet.create({
-    input: {
+    input:{
         borderWidth: 1,
-        borderColor: "red",
+        borderColor: 'green',
         marginBottom: 24
     },
-    boton: {
-        backgroundColor: "black",
-        padding: 16
+    btn:{
+        backgroundColor:'purple',
+        padding:16
     },
-    textBoton: {
-        color: "white"
+    textBtn:{
+        color:'white'
+    },
+    textLink:{
+        marginBottom:24
     }
 })
 export default FormRegister
