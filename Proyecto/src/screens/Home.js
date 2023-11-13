@@ -2,6 +2,7 @@ import { Text, View } from 'react-native'
 import React, { Component } from 'react'
 import {db} from "../firebase/config"
 import { FlatList } from 'react-native-web'
+import { Post } from '../components/Post'
 
 
 export default class Home extends Component {

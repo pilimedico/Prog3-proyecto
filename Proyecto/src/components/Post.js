@@ -70,6 +70,11 @@ export default class Post extends Component {
     render() {
         return (
         <View style={styles.containerPost}>
+            <Image
+                source={{uri: this.props.data.fotoUrl ? this.props.data.fotoUrl : ''}}
+                style={styles.img}
+                resizeMode='contain'
+            />
             <Text>{this.props.data.descripcion}</Text>
             <View>
                 <Text>
