@@ -1,4 +1,4 @@
-import { Text, View, TouchableOpacity } from 'react-native'
+import { Text, View, TouchableOpacity,StyleSheet } from 'react-native'
 import React, { Component } from 'react'
 import FormLogin from '../components/FormLogin'
 import { auth } from '../firebase/config'
@@ -10,20 +10,39 @@ export default class Login extends Component {
 
   
 
- /*  componentDidMount(){
+  componentDidMount(){
     auth.onAuthStateChanged(( user )=> {
       if(user !== null){
         this.props.navigation.navigate('TabNavigation') //si ya esta logueado que vaya al TabNavigation (home)
       }
     })
-  } */
+  } 
 
   render() {
     return (
-      <View  >
+      <View style={styles.container} >
+        <Text style={styles.tituloRegister} >Login</Text>
+
         <FormLogin navigation = {this.props.navigation} />
         
       </View>
     )
   }
 }
+
+const styles = StyleSheet.create({
+  container:{
+    flex:1, 
+    
+
+    backgroundColor: '#FFF0F5'
+  },
+  tituloRegister : {
+    color: '#FF69B4',
+    fontSize: '80px',
+    marginBottom: '15px',
+    textAlign: 'center',
+    marginTop:'50px'
+
+  },
+})

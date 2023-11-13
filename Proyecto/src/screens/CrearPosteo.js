@@ -1,4 +1,4 @@
-import { Text, View, StyleSheet, TouchableOpacity } from 'react-native'
+import { Text, View, StyleSheet, TouchableOpacity} from 'react-native'
 import React, { Component } from 'react'
 import {db,auth} from '../firebase/config'
 import FormDescripcionPost from '../components/FormDescripcionPost'
@@ -23,14 +23,20 @@ export default class NewPosteo extends Component {
           owner: auth.currentUser.email, //queremos que el posteo se firme con el usuario logueado
           createdAt: Date.now(),
           fotoUrl: fotoUrl,
+          likes:[],
+          comentarios:[],
           descripcion: descripcion //lo que recibimos por parametro
       })
-      //es una promesa asi que usamos then y catch
-      .then((res)=> console.log(res)) 
+      //es una promesa asi que usamos then y catch, si se guarda todo correctamente volver a home
+      .then((res)=> this.props.navigation.navigate('Home')) 
       .catch((err)=> console.log(err))
 
   }
-
+actualizarDescripcion(text){
+  this.setState({
+    descripcion:text
+  })
+}
   actualizarFotourl(url){
     this.setState({
       urlFoto: url,
@@ -42,7 +48,7 @@ export default class NewPosteo extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text>NewPost</Text>
+        <Text style = {styles.titulocrear} >Cargar post</Text>
         {
           this.state.paso1 ?
             <CamaraPost
@@ -51,7 +57,7 @@ export default class NewPosteo extends Component {
           :
           <>
             <FormDescripcionPost
-            // onSubmit={(obj)=> this.onSubmit(obj)}
+            
             actualizarDescripcion={(descripcion)=> this.actualizarDescripcion(descripcion)}
             estadoDescripcion = {this.state.descripcion}
             />
@@ -61,7 +67,7 @@ export default class NewPosteo extends Component {
                   fotoUrl: this.state.urlFoto
               })}
             >
-                <Text>
+                <Text style= {styles.letraCrear}>
                     Enviar
                 </Text>
             </TouchableOpacity>
@@ -74,6 +80,20 @@ export default class NewPosteo extends Component {
 
 const styles = StyleSheet.create({
   container:{
-    flex:1
-  }
+    flex:1, 
+    
+    backgroundColor: '#FFF0F5'
+  },
+  titulocrear : {
+    color: '#FF69B4',
+    fontSize: '80px',
+    marginBottom: '15px'
+
+  },
+  letraCrear: {
+    fontSize:'50px',
+    margin: '16px',
+    textAlign: 'center',
+    color: '#D87093'
+}
 })

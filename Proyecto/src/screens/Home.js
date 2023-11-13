@@ -1,8 +1,7 @@
-import { Text, View } from 'react-native'
+import { Text, View, FlatList, StyleSheet } from 'react-native'
 import React, { Component } from 'react'
 import {db} from "../firebase/config"
-import { FlatList } from 'react-native-web'
-import { Post } from '../components/Post'
+import Post from '../components/Post'
 
 
 export default class Home extends Component {
@@ -37,7 +36,10 @@ export default class Home extends Component {
 
   render() {
     return (
-      <View>
+      <View style = {styles.container}>
+        <Text style = {styles.tituloHome} >Home</Text>
+        <View style = {styles.containerPost}> 
+{this.state.posteos.length > 0 ?
 
         <FlatList
 
@@ -46,11 +48,32 @@ export default class Home extends Component {
         renderItem = { ({item}) => <Post  navigation= {this.props.navigation} data={item.data} id={item.id} />}
         
         />
+      :
+      false
+      }
 
         
         
-        
+</View>
       </View>
     )
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    backgroundColor: '#FFF0F5'
+  },
+  containerPost: {
+    flex: 1,
+    alignItems: 'center',
+    width: '50%'
+  },
+  tituloHome : {
+    color: '#FF69B4',
+    fontSize: '80px'
+
+  }
+})

@@ -12,33 +12,18 @@ export default class FormDescripcionPost extends Component {
     render() {
     return (
       <View>
-        <Text>Describe tu post</Text>
+        <Text style = {styles.letraCamara}>Describe tu post</Text>
         <View>
 
             <TextInput
             placeholder='Agrega una descripcion de su post'
-            onChangeText={(text) => this.setState({
-                descripcion : text
-            })}
-            value = {this.state.descripcion}
+            onChangeText= {(text)=>this.props.actualizarDescripcion(text)}
+            value = {this.props.estadoDescripcion}
             style = {styles.input}
+            multiline = {true}
+            numberOfLines={8}
             
             />
-
-            <TouchableOpacity //este boton ejecuta un metodo que envia cosas a firebase, la screen se encarga de enviar la informacion
-            style = {styles.btn} 
-            onPress = {()=> this.props.onSubmit({
-                descripcion : this.state.descripcion
-            })} //metodo con el que ejecutamos el envio de informacion a firebase (desde la screen NewPost)
-            >
-                <Text>
-                    Enviar
-                </Text>
-
-            </TouchableOpacity>
-
-         
-
 
         </View>
       </View>
@@ -49,11 +34,17 @@ export default class FormDescripcionPost extends Component {
 const styles = StyleSheet.create({
     input: {
         borderWidth: 1,
-        borderColor: 'red'
+        borderColor: '#DA70D6'
     },
     btn:{
         borderWidth: 1,
         borderColor: 'green'
+    },
+    letraCamara: {
+        fontSize:'50px',
+        margin: '16px',
+        textAlign: 'center',
+        color: '#D87093'
     }
 
 

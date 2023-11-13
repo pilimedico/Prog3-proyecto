@@ -1,4 +1,4 @@
-import { Text, View, TouchableOpacity, StyleSheet } from 'react-native'
+import { Text, View, TouchableOpacity, StyleSheet, Image } from 'react-native'
 import React, { Component } from 'react'
 import {FontAwesome} from "@expo/vector-icons"
 import {db, auth} from "../firebase/config"
@@ -69,21 +69,23 @@ export default class Post extends Component {
     
     render() {
         return (
-        <View style={styles.containerPost}>
+            
+        <View style = {styles.containerPost} >
+            <Text style = {styles.tituloPost}>Posteo: </Text>
             <Image
                 source={{uri: this.props.data.fotoUrl ? this.props.data.fotoUrl : ''}}
                 style={styles.img}
                 resizeMode='contain'
             />
-            <Text>{this.props.data.descripcion}</Text>
+            <Text style = {styles.letrasPost}>Publicado por: {this.props.data.owner}</Text>
+            <Text style = {styles.letrasPost}>{this.props.data.descripcion}</Text>
             <View>
-                <Text>
-                    {this.props.data.likes.length}
-                </Text>
+                
                 {
                     this.state.estaMiLike ?
                         <TouchableOpacity
                         onPress={()=> this.unlike()}
+                        style = {styles.btn}
                         >
                             <FontAwesome
                             name='heart'
@@ -94,6 +96,7 @@ export default class Post extends Component {
                         :
                         <TouchableOpacity
                         onPress={()=> this.like()}
+                        style = {styles.btn}
                         >
                         <FontAwesome
                         name='heart-o'
@@ -101,16 +104,46 @@ export default class Post extends Component {
                         size={24}
                         />
                         </TouchableOpacity>
+                        
                 }
+                <Text style = {styles.letrasPost} >Likes: {this.props.data.likes.length}</Text>
             </View>
             <View>
                 <TouchableOpacity
                     onPress={()=> this.irAComentar()}
                 >
-                    <Text>Comentar</Text>
+                    <Text style = {styles.letrasPost}>Comentarios: {this.props.data.comentarios.length}</Text>
                 </TouchableOpacity>
             </View>
         </View>
         )
     }
 }
+
+const styles = StyleSheet.create({
+    containerPost: {
+        width: '100%',
+        marginBottom: '70px',
+        border: '20px'
+    },
+    
+    img: {
+        width: '500px',
+        height: 500
+    } ,
+    tituloPost: {
+        fontSize:'50px',
+        margin: '16px',
+        textAlign: 'center',
+        color: '#D87093'
+    },
+    letrasPost: {
+        fontSize:'20px',
+        margin: '10px',
+        textAlign: 'center',
+        color: '#483D8B'
+    },
+    btn: {
+        alignSelf: 'center'
+    }
+})

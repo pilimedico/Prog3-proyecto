@@ -20,7 +20,7 @@ export default function TabNavigation() {
   return (
     <Tab.Navigator >
         <Tab.Screen 
-        name='NavegacionExtra' 
+        name='Home' 
         component={NavegacionExtra}
         options={{
             headerShown:false,

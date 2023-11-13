@@ -40,7 +40,7 @@ export default function MainNavigation() {
           name='Comentarios'
           component={Comentarios}
           options={{
-          headerShown: false
+          headerShown: true
            }}
         />
       </Stack.Navigator>

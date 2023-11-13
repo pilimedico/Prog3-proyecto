@@ -63,7 +63,7 @@ export default class CamaraPost extends Component{
                     <TouchableOpacity
                         onPress={() => this.tomarFoto()}
                     >
-                        <Text>Tomar foto</Text>
+                        <Text style = {styles.letraCamara}>Tomar foto</Text>
                     </TouchableOpacity>
                 </>
                 : this.state.permisos && this.state.mostrarCamara === false ?
@@ -76,21 +76,21 @@ export default class CamaraPost extends Component{
                         <TouchableOpacity
                             onPress={()=> this.aceptarFoto()}
                         >
-                            <Text>
+                            <Text style = {styles.letraCamara}>
                                 Aceptar Foto
                             </Text>
                         </TouchableOpacity>
                         <TouchableOpacity
                             onPress={()=> this.rechazarFoto()}
                         >
-                            <Text
+                            <Text  style = {styles.letraCamara}
                             >
                                 Rechazar Foto
                             </Text>
                         </TouchableOpacity>
                     </>
                 :
-                <Text>No tienes permisos para usar la camara</Text>
+                <Text style={styles.letraCamara}> No tienes permisos para usar la camara</Text>
     
             }
            
@@ -101,12 +101,19 @@ export default class CamaraPost extends Component{
 
     const styles = StyleSheet.create({
         container:{
-            flex:1
+            flex:1,
+            justifyContent:'center'
         },
         camara: {
             height: 300
         },
         img:{
-            height: 300
+            height: 500
+        },
+        letraCamara: {
+            fontSize:'50px',
+            margin: '16px',
+            textAlign: 'center',
+            color: '#D87093'
         }
     })

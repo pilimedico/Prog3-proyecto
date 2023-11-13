@@ -19,15 +19,15 @@ loguearUsuario(mail,password){
     .then((user)=> {
         this.props.navigation.navigate('TabNavigation')
     })
-    .catch((err)=> console.log(err))
+    .catch((err)=> alert('Usuario o contraseña incorrecto'))
 }
 
 
 
   render() {
     return (
-      <View>
-        <Text>Login</Text>
+      <View style = {styles.container}>
+        
         <View>
 
 
@@ -53,14 +53,15 @@ loguearUsuario(mail,password){
             />
 
             <Text style={styles.textLink} >
-                    ¿No tienes una cuenta?
+                    ¿No tienes una cuenta?   </Text>
 
                     <TouchableOpacity
                         onPress={()=> this.props.navigation.navigate('Register')}
+                        style={styles.textLink}
                     >
                         Regístrate aquí!
                     </TouchableOpacity>
-                </Text>
+              
 
             <TouchableOpacity 
             onPress={()=> this.loguearUsuario(this.state.mail,this.state.password)} //metodo de validacion, si no puede loguear le diga sino this.props.navigate. 
@@ -86,17 +87,33 @@ loguearUsuario(mail,password){
 const styles = StyleSheet.create({
     input:{
         borderWidth: 1,
-        borderColor: 'green',
-        marginBottom: 24
+        borderColor: '#DA70D6',
+        marginBottom: 24,
+        height : '50px',
+        width: '80%',
+        alignSelf: 'center'
     },
     btn:{
-        backgroundColor:'purple',
-        padding:16
+        backgroundColor:'#D8BFD8',
+        padding:25
     },
     textBtn:{
-        color:'white'
+        color:'white',
+        alignSelf: 'center',
+        fontSize: 'large'
     },
     textLink:{
-        marginBottom:24
-    }
+        marginBottom:24,
+    
+        fontSize:'50px',
+        margin: '16px',
+        textAlign: 'center',
+        color: '#D87093'
+    },
+    container:{
+        flex:1, 
+        justifyContent: 'center',
+        backgroundColor: '#FFF0F5'
+      },
+    
 })

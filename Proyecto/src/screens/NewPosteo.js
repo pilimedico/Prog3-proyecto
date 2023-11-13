@@ -1,8 +1,8 @@
-import { Text, View, TouchableOpacity, StyleSheet } from 'react-native'
+/* import { Text, View, TouchableOpacity, StyleSheet } from 'react-native'
 import React, { Component } from 'react'
 import {db,auth} from '../firebase/config'
 import FormDescripcionPost from '../components/FormDescripcionPost'
-import CamraPost from '../components/CamaraPost'
+import CamaraPost from '../components/CamaraPost'
 
 export default class NewPosteo extends Component {
   //como parametro le pasamos un objeto literal y le pasamos una recibe una descripcion
@@ -22,6 +22,8 @@ export default class NewPosteo extends Component {
           owner: auth.currentUser.email, //queremos que el posteo se firme con el usuario logueado
           createdAt: Date.now(),
           fotoUrl: fotoUrl,
+          likes:[],
+          comments:[],
           descripcion: descripcion //lo que recibimos por parametro
       })
       //es una promesa asi que usamos then y catch
@@ -79,4 +81,4 @@ const styles = StyleSheet.create({
   container:{
     flex:1
   }
-})
+}) */
