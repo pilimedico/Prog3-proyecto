@@ -43,8 +43,15 @@ export default class MiPerfil extends Component {
       })
   }
 
+eliminarPost(postId){  //le pasamos como parametro postId que luegotomata el id de este posteo
+db.collection('posts').doc(postId).delete()
+}
 
+/* eliminarPerfil(){
+  db.collection('users')
+  .where('owner','==',auth.currentUser.email)
 
+} */
   logout(){
     auth.signOut()
     this.props.navigation.navigate('Register')
@@ -62,7 +69,11 @@ export default class MiPerfil extends Component {
             renderItem={({item}) => <View>
               <Text style = {styles.letraPerfil}>Mail: {item.data.owner}</Text>
               <Text style = {styles.letraPerfil}>Nombre: {item.data.name}</Text>
-              <Text style = {styles.letraPerfil}>Minibio: {item.data.minibio}</Text>
+              {item.data.minibio ?
+                                <Text style = {styles.letraPerfil} >Minibio: {item.data.minibio}</Text>
+                                :
+                                ''
+                            }
             
               </View>
                }
@@ -75,6 +86,11 @@ export default class MiPerfil extends Component {
             renderItem={({ item }) =>
                 <View>
                     <Post navigation={this.props.navigation} data={item.data} id={item.id} />
+                    <TouchableOpacity
+                  style={styles.boton}
+                  onPress={() => this.eliminarPost(item.id)}>
+                  <Text style={styles.letraBoton2}>Eliminar posteo</Text>
+                </TouchableOpacity>
                 </View>
             }
             />
@@ -82,7 +98,7 @@ export default class MiPerfil extends Component {
 
 
        <TouchableOpacity
-          style={styles.signoutBtn}
+          
           onPress={()=> this.logout()}
           >
             <Text style = {styles.letraboton}>Cerrar sesión</Text>
@@ -116,5 +132,13 @@ const styles = StyleSheet.create({
     margin: '10px',
     color: 'red',
     fontSize:'50px'
+  },
+  boton: {
+    backgroundColor: '#E5A3E2',
+    padding: 20
+  },
+  letraBoton2:{
+    color: 'white',
+    textAlign: 'center'
   }
 })

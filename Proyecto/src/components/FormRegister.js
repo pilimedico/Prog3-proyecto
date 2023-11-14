@@ -10,12 +10,13 @@ export default class FormRegister extends Component {
             name: "",
             email: "",
             password: "",
-            minibio: ""
+            minibio: "",
+            fotoPerfil: ""
 
         }
     }
 //usamos auth dentro del metodo registrarUsuario que recibe como parametro el name,email y password para autenticar al usuario en nuestra firebase
-    registrarUsuario(name, email, password, minibio){
+    registrarUsuario(name, email, password, minibio, fotoPerfil){
         if(name == ''){
             alert('El campo name esta vacío')
         }
@@ -31,7 +32,9 @@ export default class FormRegister extends Component {
                 owner: email,  
                 createdAt: Date.now(),
                 name: name,
-                minibio: minibio
+                minibio: minibio,
+                fotoPerfil: fotoPerfil
+
             })
         )
         .then((resp) => console.log(resp)) // .collection tambien retorna una promesa entonces se escribe nuevamente then
@@ -95,6 +98,17 @@ export default class FormRegister extends Component {
                 onChangeText = {(text) => this.setState({password:text})} 
             />
 
+            <TextInput 
+            //pidiendo foto de perfil
+            
+            style={styles.input}
+            placeholder="Ingresa tu foto de perfil"
+            keyboardType="default"
+            value={this.state.fotoPerfil}
+            onChangeText={(text) => this.setState({ fotoPerfil: text })}
+          />
+            
+
             <Text style={styles.textLink} > ¿Tienes una cuenta?  </Text>
                     <TouchableOpacity
                     onPress={()=> this.props.navigation.navigate('Login')}
@@ -107,7 +121,7 @@ export default class FormRegister extends Component {
                     {this.state.name != '' && this.state.email != ''  && this.state.password !='' ?
 
 <TouchableOpacity 
-onPress={()=> this.registrarUsuario(this.state.name, this.state.email, this.state.password, this.state.minibio)}                
+onPress={()=> this.registrarUsuario(this.state.name, this.state.email, this.state.password, this.state.minibio, this.state.fotoPerfil)}                
 style={styles.btn}>
     <Text style={styles.textBtn}> Registrame ahora!!</Text>
 </TouchableOpacity>

@@ -64,6 +64,15 @@ export default class Post extends Component {
     irAComentar(){
         this.props.navigation.navigate('Comentarios', {id : this.props.id}) //
     }
+
+
+    irAPerfil() {
+        {this.props.data.owner == auth.currentUser.email ? 
+            this.props.navigation.navigate('MiPerfil')
+          : 
+          this.props.navigation.navigate('PerfilAmigo', { user: this.props.data.owner });
+        }
+      }
     
   
     
@@ -77,7 +86,10 @@ export default class Post extends Component {
                 style={styles.img}
                 resizeMode='contain'
             />
+            <TouchableOpacity onPress={() => this.irAPerfil()}>
             <Text style = {styles.letrasPost}>Publicado por: {this.props.data.owner}</Text>
+        </TouchableOpacity>
+           
             <Text style = {styles.letrasPost}>{this.props.data.descripcion}</Text>
             <View>
                 
