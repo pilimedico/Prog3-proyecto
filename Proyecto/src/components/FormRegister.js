@@ -11,7 +11,7 @@ export default class FormRegister extends Component {
             email: "",
             password: "",
             minibio: "",
-            fotoPerfil: ""
+            fotoPerfil: ''
 
         }
     }
@@ -34,14 +34,13 @@ export default class FormRegister extends Component {
                         owner: email,
                         createdAt: Date.now(),
                         name: name,
-                        minibio: minibio,
-                        fotoPerfil: fotoPerfil
+                        minibio: minibio
                     })
                     .then()
                     .then()
                     .catch()
                 )
-                .then((resp) => this.props.navigation.navigate('InfoAdicionalUser')) // .collection tambien retorna una promesa entonces se escribe nuevamente then
+                .then((resp) => this.props.navigation.navigate('InfoAdicionalUser'), {docId: resp.id}) // .collection tambien retorna una promesa entonces se escribe nuevamente then
                 .catch((err) => alert('No se ha podido registrar, ha habido un error: ' + err))
         }
 
@@ -127,7 +126,7 @@ export default class FormRegister extends Component {
                     {this.state.name != '' && this.state.email != ''  && this.state.password !='' ?
 
 <TouchableOpacity 
-onPress={()=> this.registrarUsuario(this.state.name, this.state.email, this.state.password, this.state.minibio, this.state.fotoPerfil)}                
+onPress={()=> this.registrarUsuario(this.state.name, this.state.email, this.state.password, this.state.minibio)}                
 style={styles.btn}>
     <Text style={styles.textBtn}> Registrame ahora!!</Text>
 </TouchableOpacity>
