@@ -2,6 +2,7 @@ import { Text, View, TouchableOpacity, StyleSheet, FlatList, Image } from 'react
 import React, { Component } from 'react'
 import {db, auth} from '../firebase/config'
 import Post from '../components/Post'
+
 export default class PerfilAmigo extends Component {
   constructor(props){
     super(props)
@@ -21,8 +22,7 @@ export default class PerfilAmigo extends Component {
           data: doc.data()
         })
       })
-      /* .then()
-      .catch() */
+      .catch(err => console.log(err)) 
       
       this.setState({
         usuario : arrDocs
@@ -57,7 +57,7 @@ export default class PerfilAmigo extends Component {
                         renderItem={({ item }) => 
                         <View>
                             <Text  style = {styles.tituloPerfil}>Usuario: {item.data.name}</Text>
-                            <Text style = {styles.letraPerefil}>Email: {item.data.owner}</Text>
+                            <Text style = {styles.letraPerfil}>Email: {item.data.owner}</Text>
                             {item.data.minibio ?
                                 <Text style = {styles.letraPerfil}>Minibio: {item.data.minibio}</Text>
                                 :

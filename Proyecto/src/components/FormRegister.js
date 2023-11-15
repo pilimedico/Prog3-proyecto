@@ -16,32 +16,36 @@ export default class FormRegister extends Component {
         }
     }
 //usamos auth dentro del metodo registrarUsuario que recibe como parametro el name,email y password para autenticar al usuario en nuestra firebase
-    registrarUsuario(name, email, password, minibio, fotoPerfil){
-        if(name == ''){
+    //usamos auth dentro del metodo registrarUsuario que recibe como parametro el name,email y password para autenticar al usuario en nuestra firebase
+    registrarUsuario(name, email, password, minibio, fotoPerfil) {
+        if (name == '') {
             alert('El campo name esta vacío')
         }
-        if(password == ''){
+        if (password == '') {
             alert('El campo password esta vacío')
         }
-        if(email == ''){
+        if (email == '') {
             alert('El campo email esta vacío')
         }
-        if (name != '' && password != '' && email != ''){
+        if (name != '' && password != '' && email != '') {
             auth.createUserWithEmailAndPassword(email, password)
-        .then(user => db.collection('users').add({  //como todos los metodos de firebase son promesas le agregamos then y catch
-                owner: email,  
-                createdAt: Date.now(),
-                name: name,
-                minibio: minibio,
-                fotoPerfil: fotoPerfil
-
-            })
-        )
-        .then((resp) => console.log(resp)) // .collection tambien retorna una promesa entonces se escribe nuevamente then
-        .catch( (err) => alert('No se ha podido registrar, ha habido un error: ' + err))
+                .then(user =>
+                    db.collection('users').add({ //como todos los metodos de firebase son promesas le agregamos then y catch
+                        owner: email,
+                        createdAt: Date.now(),
+                        name: name,
+                        minibio: minibio,
+                        fotoPerfil: fotoPerfil
+                    })
+                    .then()
+                    .then()
+                    .catch()
+                )
+                .then((resp) => this.props.navigation.navigate('InfoAdicionalUser')) // .collection tambien retorna una promesa entonces se escribe nuevamente then
+                .catch((err) => alert('No se ha podido registrar, ha habido un error: ' + err))
         }
-        
-    } 
+
+    }
 
     
     
@@ -100,6 +104,8 @@ export default class FormRegister extends Component {
 
             <TextInput 
             //pidiendo foto de perfil
+            //el usuario si no tiene una sesion creada hay que hacer una estrategia: 
+            //en el registro, hacer instancia entre register y home para tomar datos de imagen con una vista adicional
             
             style={styles.input}
             placeholder="Ingresa tu foto de perfil"

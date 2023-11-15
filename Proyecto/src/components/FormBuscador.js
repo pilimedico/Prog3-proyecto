@@ -22,7 +22,7 @@ export default class FormBuscador extends Component {
           <View>
             <TextInput
             style={styles.input}
-            placeholder="Realice su búsqueda"
+            placeholder="Realice su búsqueda por email"
             name="búsqueda"
             onChangeText={(text) => this.onChangeText(text)}
             />

@@ -46,12 +46,14 @@ export default class MiPerfil extends Component {
 eliminarPost(postId){  //le pasamos como parametro postId que luegotomata el id de este posteo
 db.collection('posts').doc(postId).delete()
 }
-
-/* eliminarPerfil(){
+//buscarlo, obtener id y eliminarlo
+// o con snapshot
+eliminarPerfil(){
   db.collection('users')
   .where('owner','==',auth.currentUser.email)
 
-} */
+
+} 
   logout(){
     auth.signOut()
     this.props.navigation.navigate('Register')

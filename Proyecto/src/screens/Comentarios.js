@@ -33,24 +33,19 @@ export default class Comentarios extends Component {
 
         {
           this.state.dataPosteo != null  ?
-          
+          this.state.dataPosteo.comentarios.length > 0 ?
          
           <FlatList 
 
           data= {this.state.dataPosteo.comentarios}
           keyExtractor={(item)=> item.createdAt.toString()}
           renderItem = { ({item}) =>
-
           <View> 
             <Text style = {styles.letraComentario}>{item.texto} por: {item.owner} </Text>
-            
-  
           </View> 
-        
-        }
-          
-          />
-          
+        }/>
+          :
+          <Text>Aun no hay comentarios</Text>
           :
           ''
 

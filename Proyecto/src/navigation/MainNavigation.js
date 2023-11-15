@@ -7,7 +7,7 @@ import TabNavigation from './TabNavigation';
 import Register from '../screens/Register';
 import Login from '../screens/Login';
 import Comentarios from '../screens/Comentarios';
-
+import infoAdicionalUser from '../screens/infoAdicionalUser';
 
 const Stack = createNativeStackNavigator();
 
@@ -39,6 +39,13 @@ export default function MainNavigation() {
         <Stack.Screen
           name='Comentarios'
           component={Comentarios}
+          options={{
+          headerShown: true
+           }}
+        />
+        <Stack.Screen
+          name='infoAdicionalUser'
+          component={infoAdicionalUser}
           options={{
           headerShown: true
            }}
