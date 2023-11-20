@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
         borderColor: '#DA70D6',
         margin: 20,
         height : '50px',
-        width: '500px',
+        width: '300px',
         alignSelf: 'center'
     },
     btn:{

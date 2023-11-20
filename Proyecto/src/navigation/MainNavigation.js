@@ -7,7 +7,8 @@ import TabNavigation from './TabNavigation';
 import Register from '../screens/Register';
 import Login from '../screens/Login';
 import Comentarios from '../screens/Comentarios';
-import infoAdicionalUser from '../screens/infoAdicionalUser';
+import InfoAdicionalUser from '../screens/InfoAdicionalUser';
+import PerfilAmigo from '../screens/PerfilAmigo';
 
 const Stack = createNativeStackNavigator();
 
@@ -44,12 +45,17 @@ export default function MainNavigation() {
            }}
         />
         <Stack.Screen
-          name='infoAdicionalUser'
-          component={infoAdicionalUser}
+          name='InfoAdicionalUser'
+          component={InfoAdicionalUser}
           options={{
-          headerShown: true
+          headerShown: false
            }}
         />
+        <Stack.Screen 
+          name='PerfilAmigo' 
+          component={PerfilAmigo}
+          
+          />
       </Stack.Navigator>
     </NavigationContainer>
   )

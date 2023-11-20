@@ -47,9 +47,15 @@ export default class Buscador extends Component {
   }
 
   irAPerfil(owner){
-    owner == auth.currentUser.email ? 
-    this.props.navigation.navigate('MiPerfil'):
-    this.props.navigation.navigate('PerfilAmigo', {user:owner})
+    console.log(owner);
+      {owner == auth.currentUser.email ? 
+          this.props.navigation.navigate('MiPerfil')
+        : 
+        this.props.navigation.navigate('PerfilAmigo', { user: owner });
+      }
+    
+    
+    
   }
 
   render() {

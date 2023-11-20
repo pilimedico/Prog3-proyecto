@@ -23,13 +23,19 @@ export default class Home extends Component {
           id: doc.id,
           data:doc.data()
         })
+        
+        
 
       })
+
+      
 
       this.setState({
         posteos: arrPosteos
       })
+      
     })
+    
 
   }
 
@@ -45,7 +51,7 @@ export default class Home extends Component {
 
         data = {this.state.posteos}
         keyExtractor = {(item) => item.id.toString()} 
-        renderItem = { ({item}) => <Post  navigation= {this.props.navigation} data={item.data} id={item.id} />}
+        renderItem = { ({item}) => <Post  navigation= {this.props.navigation} data={item.data} id={item.id} />} //mandamos la prop de navigation para que se pueda colocar el navigation desde un componente con props
         
         />
       :

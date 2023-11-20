@@ -12,6 +12,7 @@ export default class PerfilAmigo extends Component {
     }
   }
   componentDidMount(){
+    console.log(this.props.route.params.user);
     db.collection('users')
     .where('owner', '==', this.props.route.params.user)
     .onSnapshot((docs)=> {
@@ -22,7 +23,7 @@ export default class PerfilAmigo extends Component {
           data: doc.data()
         })
       })
-      .catch(err => console.log(err)) 
+      
       
       this.setState({
         usuario : arrDocs
@@ -63,7 +64,7 @@ export default class PerfilAmigo extends Component {
                                 :
                                 ''
                             }
-                            {item.data.fotoPerfil != '' ?
+                            {item.data.fotoPerfil !== ''?
                                 <Image
                                     source={item.data.fotoPerfil}
                                     style = {styles.img}
@@ -104,8 +105,8 @@ const styles = StyleSheet.create({
   
   tituloPerfil : {
     color: '#FF69B4',
-    fontSize: '80px',
-    marginBottom: '50px'
+    fontSize: '40px',
+    marginTop: 50
 
   },
   letraPerfil: {
@@ -113,7 +114,7 @@ const styles = StyleSheet.create({
     margin: '16px'
   },
   img : {
-    borderRadius: '50%',
+  borderRadius: '50%',
   width: '200px'
   },
   letraCrear: {

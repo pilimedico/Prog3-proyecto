@@ -21,8 +21,6 @@ export default class Login extends Component {
   render() {
     return (
       <View style={styles.container} >
-        <Text style={styles.tituloRegister} >Login</Text>
-
         <FormLogin navigation = {this.props.navigation} />
         
       </View>
@@ -36,13 +34,5 @@ const styles = StyleSheet.create({
     
 
     backgroundColor: '#FFF0F5'
-  },
-  tituloRegister : {
-    color: '#FF69B4',
-    fontSize: '80px',
-    marginBottom: '15px',
-    textAlign: 'center',
-    marginTop:'50px'
-
-  },
+  }
 })

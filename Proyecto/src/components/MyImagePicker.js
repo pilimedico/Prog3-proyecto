@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 import * as ImagePicker from 'expo-image-picker'
 import {storage} from '../firebase/config'
 
-export default class imagePicker extends Component {
+export default class MyImagePicker extends Component {
     constructor(props){
         super(props)
         this.state = {

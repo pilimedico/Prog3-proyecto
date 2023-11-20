@@ -25,10 +25,11 @@ export default class Post extends Component {
         })
     }
   
+    //en este metodo actualizamos el documento correspondiente a este posteo
     like(){
         db
         .collection('posts')
-        .doc(this.props.id)
+        .doc(this.props.id) //corresponde a item.id que fue pasado del componente padre con props (home)
         .update({
             likes: firebase.firestore.FieldValue.arrayUnion(auth.currentUser.email) //actualizo el valor de la propiedad likes. Le paso el mail del usuario logueado
         
@@ -140,12 +141,13 @@ const styles = StyleSheet.create({
     },
     
     img: {
-        width: '500px',
-        height: 500
+        width: '600px',
+        height: 300
+       
     } ,
     tituloPost: {
         fontSize:'50px',
-        margin: '16px',
+        margin: '10px',
         textAlign: 'center',
         color: '#D87093'
     },

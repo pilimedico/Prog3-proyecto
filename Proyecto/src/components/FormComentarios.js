@@ -2,6 +2,7 @@ import { Text, View, TextInput, TouchableOpacity, StyleSheet } from 'react-nativ
 import React, { Component } from 'react'
 import {db, auth} from '../firebase/config'
 import firebase from 'firebase'
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 export default class FormComentarios extends Component {
     constructor(props){
@@ -36,20 +37,17 @@ export default class FormComentarios extends Component {
         value = {this.state.texto}
         multiline = {true}
         numberOfLines={4}
-        styles = {styles.input}
+        style = {styles.input}
         
         />
 
-        {this.state.texto != '' ?
+        {this.state.texto !== '' ?
 
-        <TouchableOpacity
-        onPress={()=> this.enviarComentario(this.state.texto)}>
-            <Text>
-                Enviar
-            </Text>
+        
 
-
-        </TouchableOpacity>
+<TouchableOpacity onPress={() => this.enviarComentario(this.state.texto)}>
+<MaterialCommunityIcons name="send" size={24} color="#AF47F7" style={styles.boton} />
+</TouchableOpacity>
     
         
         :
@@ -67,6 +65,10 @@ export default class FormComentarios extends Component {
 const styles = StyleSheet.create({
     input: {
         borderWidth: 1,
-        bordeColor: 'green'
+        borderColor: '#AF47F7'
+    },
+    boton: {
+        width: '10vw',
+        height: 50
     }
 })

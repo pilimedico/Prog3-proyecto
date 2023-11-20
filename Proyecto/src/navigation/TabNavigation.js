@@ -12,7 +12,7 @@ import Buscador from '../screens/Buscador'
 import MiPerfil from '../screens/MiPerfil'
 import CrearPosteo from '../screens/CrearPosteo'
 
-import NavegacionExtra from './NavegacionExtra'
+
 
 const Tab = createBottomTabNavigator()
 
@@ -21,7 +21,7 @@ export default function TabNavigation() {
     <Tab.Navigator >
         <Tab.Screen 
         name='Home' 
-        component={NavegacionExtra}
+        component={Home}
         options={{
             headerShown:false,
             tabBarIcon: ()=> <FontAwesome5 name='home' size={24} color='black' />

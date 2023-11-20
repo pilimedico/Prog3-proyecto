@@ -108,10 +108,10 @@ export default class CamaraPost extends Component{
             height: 300
         },
         img:{
-            height: 500
+            height: 200
         },
         letraCamara: {
-            fontSize:'50px',
+            fontSize:'20px',
             margin: '16px',
             textAlign: 'center',
             color: '#D87093'

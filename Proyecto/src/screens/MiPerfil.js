@@ -1,4 +1,4 @@
-import { Text, View, StyleSheet, TouchableOpacity, FlatList } from 'react-native'
+import { Text, View, StyleSheet, TouchableOpacity, FlatList, Image, Modal } from 'react-native'
 import React, { Component } from 'react'
 import {db, auth} from '../firebase/config'
 import Post from '../components/Post'
@@ -9,7 +9,9 @@ export default class MiPerfil extends Component {
     super(props)
     this.state={
       usuarios:[], 
-      posteos: []
+      posteos: [],
+      mostrarModal: false,
+      postABorrar: null
     }
   }
 
@@ -25,7 +27,7 @@ export default class MiPerfil extends Component {
 
         this.setState({
           usuarios : arrDocs
-        }, () => console.log(this.state.usuarios))
+        })
   
       })
     db.collection('posts').where('owner', '==', auth.currentUser.email).onSnapshot((docs)=>{
@@ -43,9 +45,26 @@ export default class MiPerfil extends Component {
       })
   }
 
-eliminarPost(postId){  //le pasamos como parametro postId que luegotomata el id de este posteo
-db.collection('posts').doc(postId).delete()
+eliminarPost(item){  //le pasamos como parametro postId que luegotomata el id de este posteo
+db.collection('posts').doc(item.id).delete()
 }
+
+confirmarEliminarPost(item) {
+  this.setState({ mostrarModal: true, postABorrar: item });
+}
+
+realizarEliminarPost() {
+  this.eliminarPost(this.state.postABorrar);
+  this.setState({ mostrarModal: false, postABorrar: null });
+}
+
+cancelarEliminarPost() {
+  this.setState({ mostrarModal: false, postABorrar: null });
+}
+
+
+
+
 //buscarlo, obtener id y eliminarlo
 // o con snapshot
 eliminarPerfil(){
@@ -62,13 +81,23 @@ eliminarPerfil(){
   render() {
     return (
       <View style = {styles.container}>
-        
+      <Text style = {styles.tituloPerfil2}> Mi Perfil: </Text>
        <Text style = {styles.tituloPerfil}> Mis datos: </Text>
        
        <FlatList
             data={this.state.usuarios}
             keyExtractor={(item)=> item.id.toString() }
             renderItem={({item}) => <View>
+              { item.data.fotoPerfil ?
+              <Image
+              source={item.data.fotoPerfil}
+              style={styles.img}
+              resizeMode='contain'
+            />:
+            ''
+              }
+              
+              
               <Text style = {styles.letraPerfil}>Mail: {item.data.owner}</Text>
               <Text style = {styles.letraPerfil}>Nombre: {item.data.name}</Text>
               {item.data.minibio ?
@@ -90,12 +119,36 @@ eliminarPerfil(){
                     <Post navigation={this.props.navigation} data={item.data} id={item.id} />
                     <TouchableOpacity
                   style={styles.boton}
-                  onPress={() => this.eliminarPost(item.id)}>
+                  onPress={() => this.confirmarEliminarPost(item)}>
                   <Text style={styles.letraBoton2}>Eliminar posteo</Text>
                 </TouchableOpacity>
                 </View>
             }
             />
+            <Modal 
+      animationType="slide" 
+      transparent={true}  
+      visible={this.state.mostrarModal}>
+          <View >
+          <View style  = {styles.containerModal} >
+            <Text style  = {styles.letraPerfil}>
+             ¿Seguro quieres eliminar este post?
+            </Text>
+            <TouchableOpacity
+              onPress={() => this.realizarEliminarPost()}
+              style = {styles.boton2}
+            >
+              <Text style = {styles.letraBoton2} >Aceptar</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => this.cancelarEliminarPost()}
+              style = {styles.boton2}
+            >
+              <Text style = {styles.letraBoton2} > Rechazar</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </Modal>
 
 
 
@@ -121,8 +174,14 @@ const styles = StyleSheet.create({
   
   tituloPerfil : {
     color: '#FF69B4',
-    fontSize: '80px',
-    marginBottom: '50px'
+    fontSize: '40px',
+    marginTop: '20px'
+
+  },
+  tituloPerfil2 : {
+    color: '#FF69B4',
+    fontSize: '70px',
+    marginBottom: '10px'
 
   },
   letraPerfil: {
@@ -130,7 +189,7 @@ const styles = StyleSheet.create({
     margin: '16px'
   },
   letraboton: {
-    fontSize:'large',
+    fontSize:'30px',
     margin: '10px',
     color: 'red',
     fontSize:'50px'
@@ -139,8 +198,25 @@ const styles = StyleSheet.create({
     backgroundColor: '#E5A3E2',
     padding: 20
   },
+  boton2: {
+    backgroundColor: '#A055BA',
+    padding: 20,
+    margin: 20
+  },
+  containerModal: {
+    flex: 1,
+    alignItems: 'center',
+    backgroundColor: '#8C29AF'
+
+    },
   letraBoton2:{
     color: 'white',
     textAlign: 'center'
+  },
+  img: {
+    width:'200px',
+    height:'200px',
+    borderRadius: '500px'
+
   }
 })

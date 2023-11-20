@@ -14,11 +14,8 @@ export default class NewPosteo extends Component {
       paso1:true
     }
   }
-    
-  onSubmit({
-      descripcion, //pasamos como parametro un objeto literal (tecnica de programacion)
-      fotoUrl
-  }){
+    //pasamos como parametro un objeto literal (tecnica de programacion)
+  onSubmit({ descripcion, fotoUrl}){
       db.collection('posts').add({
           owner: auth.currentUser.email, //queremos que el posteo se firme con el usuario logueado
           createdAt: Date.now(),
@@ -27,10 +24,15 @@ export default class NewPosteo extends Component {
           comentarios:[],
           descripcion: descripcion //lo que recibimos por parametro
       })
+      
       //es una promesa asi que usamos then y catch, si se guarda todo correctamente volver a home
       .then((res)=> this.props.navigation.navigate('Home')) 
       .catch((err)=> console.log(err))
-
+      this.setState({
+        descripcion:'',
+        urlFoto:'',
+        paso1:true
+      })  
   }
 actualizarDescripcion(text){
   this.setState({
@@ -86,7 +88,7 @@ const styles = StyleSheet.create({
   },
   titulocrear : {
     color: '#FF69B4',
-    fontSize: '80px',
+    fontSize: '40px',
     marginBottom: '15px'
 
   },

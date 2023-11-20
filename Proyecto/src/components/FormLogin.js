@@ -27,7 +27,7 @@ loguearUsuario(mail,password){
   render() {
     return (
       <View style = {styles.container}>
-        
+          <Text style={styles.tituloRegister} > Login </Text>
         <View>
 
 
@@ -59,7 +59,8 @@ loguearUsuario(mail,password){
                         onPress={()=> this.props.navigation.navigate('Register')}
                         style={styles.textLink}
                     >
-                        Regístrate aquí!
+                       <Text  style = {styles.textRegistrate} > Regístrate aquí!</Text>
+                        
                     </TouchableOpacity>
               
 
@@ -104,7 +105,6 @@ const styles = StyleSheet.create({
     },
     textLink:{
         marginBottom:24,
-    
         fontSize:'50px',
         margin: '16px',
         textAlign: 'center',
@@ -115,5 +115,20 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         backgroundColor: '#FFF0F5'
       },
+      textRegistrate: {
+        fontSize: "40px",
+        margin: 20,
+        textAlign: "center",
+        color: "#C994DC"
+    
+      },
+      tituloRegister : {
+        color: '#FF69B4',
+        fontSize: '40px',
+        marginBottom: '15px',
+        textAlign: 'center',
+        marginTop:'50px'
+    
+      }
     
 })
